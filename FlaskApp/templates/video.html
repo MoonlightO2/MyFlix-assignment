@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><!-- comment -->
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <link rel="stylesheet" href="myflixstyle.css">
+        <title>myFlix Video</title>
+    </head>
+    <body>
+      <h1>Your video</h1>
+      <h2>{{ name }}</h1>
+
+
+      <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px"
+	     controls preload="none" poster='http://35.228.145.155/pics/{{pic}}'
+	     data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+	<source src="http://35.228.145.155/mp4/{{file}}" type='video/mp4' />
+	
+      </video>
+      </div>

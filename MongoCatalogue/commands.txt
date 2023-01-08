@@ -1,0 +1,30 @@
+Lets run Mongo
+docker run -d   --name mongodb -v "$PWD/data:/data/db" -v "$PWD/import:/home" mongo:3.6 
+Now lets see a file of data
+We can import it like this
+docker  exec  mongodb mongoimport --db myflix --collection films --drop --file /home/film.json
+We enter the docker container like this
+docker exec -i -t mongodb bash
+And run the Mongo shell
+mongo 
+Tell Mongo what collection to use
+use myflix
+show collections
+Find the films in the database
+db.films.find()
+db.films.find().pretty()
+Find a particular film
+db.films.find({"video.Name":"Aliens"}).pretty()
+
+Lets do some other searches
+db.films.find({"video.studio":null}).pretty()
+
+db.films.find({"video.Players":{$exists:true}}).pretty()
+
+db.films.find({"video.studio":{$exists:true}}).pretty()
+
+db.films.find({"video.Players":"Carrie Henn"}).pretty()
+
+db.films.find({"video.studio":{$exists:true}}).pretty()
+
+db.films.find({"video.Name":/Alien/}).pretty()

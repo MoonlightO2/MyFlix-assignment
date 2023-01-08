@@ -1,0 +1,40 @@
+{
+	video: {
+		server: 1,
+		Name: "Alien",
+		file: "Alien.mp4",
+		thumb: "Alien-th.png",
+		pic: "Alien.png",
+		Players: ["Tom Skerritt", "Sigourney Weaver", "Veronica Cartwright", "Harry Dean Stanton",
+			"John Hurt", "Ian Holm", "Yaphet Kotto", "Bolaji Badejo", "Helen Horton"
+		],
+		category: "shorts"
+	}
+}
+
+{
+	video: {
+		server: 1,
+		Name: "Aliens",
+		file: "Aliens.mp4",
+		thumb: "Aliens-th.png",
+		pic: "Aliens.png",
+		Players: ["Carrie Henn", "Sigourney Weaver", "Michael Biehn"
+		],
+		category: "shorts",
+    studio:"Twentieth Century Fox"
+	}
+}
+
+{
+	video: {
+		server: 1,
+		Name: "The Adventures of Buckaroo Banzai Across the 8th Dimension",
+		file: "BuckarooBanzai.mp4",
+		thumb: "BuckarooBanzai-th.png",
+		pic: "BuckarooBanzai.png",
+		Players: ["Peter Weller", "John Lithgow", "Ellen Barkin"],
+		category: "shorts",
+    studio:"Twentieth Century Fox"
+	}
+}

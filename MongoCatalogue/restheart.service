@@ -1,0 +1,10 @@
+[Unit]
+Description=Mongdb
+After=docker.service
+Requires=docker.service
+After=mongo.service
+[Service]
+TimeoutStartSec=0
+ExecStart= /usr/bin/docker start restheart
+[Install]
+WantedBy=multi-user.target
