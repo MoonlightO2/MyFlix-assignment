@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Shashini Peiris "shashpeiris@gmail.com"
-ENV REFRESHED_AT 2023-01-10
+ENV REFRESHED_AT 2015-28-04
 RUN apt-get update
 RUN apt-get install -y nginx
 RUN mkdir -p /var/www/html
