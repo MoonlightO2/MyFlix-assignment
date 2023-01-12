@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'my secret'
 @app.route('/', methods=["GET", "POST"])
 def index():
   if request.method == "GET":
-    return render_template('index.html')
+    return render_template('newupload.html')
   
   if not 'file' in request.files:
     flash('No file part in request')
