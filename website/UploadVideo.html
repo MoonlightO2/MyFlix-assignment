@@ -10,8 +10,7 @@
 </head>
 <body>
 <h1>MyFlix by Shashini - Upload Page</h1>
-<img src="http://34.105.158.126/media/pics/logo_myflix.PNG" alt="MyFlix by Shashini.. The ultimate streaming experience" width="200" height="200" style="float:right"><br>
-<h4>The ultimate streaming experience</h4><br>
+<img src="media/pics/logo_myflix.PNG" width=25% height=25% style="float:right"><br>
 
 <!-- The form -->
 <form class="example" action="action_page.py"><br>
@@ -19,31 +18,17 @@
   <button type="submit"><i class="fa fa-search"></i></button>
 </form><br>
 
-<div class="container">
-<div class="row">
-    <h2>Select a file to upload</h2>
-    <form method="post" action="/" enctype="multipart/form-data">
-        <dl>
-            <p>
-                <input type="file" name="file" class="form-control" autocomplete="off" required>
-            </p>
-        </dl>
-        <p>
-            <input type="submit" value="Submit" class="btn btn-info">
-        </p>
+  <div class="container">
+    <h3>Upload your files here</h3>
+    <p>Upload only png, jpg, jpeg, gif, mp4 images only.</p>
+    <form action="/" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" required multiple>
+      <input type="submit" value="Upload">
     </form>
-</div>
-</div>
-<div>
-<a href="index.html">Home page</a><br>
-<a href="Login.html">Login page</a><br>
-<a href="SignUp.html">Sign Up page</a><br>
-<a href="UploadVideo.html">Upload Video page</a><br>
-<a href="TheWishgranter.html">The Wishgranter video</a><br>
-<a href="SwanLake.html">Swan Lake - Baxter Park</a><br>
-<a href="Christmastime.html">Christmas Time</a><br>
-<a href="Hydrangea.html">Hydrangea</a><br>
-</div>
+  </div>
+
+<div><a href="index.html">Home page</a><br /> <a href="Login.html">Login page</a><br /> <a href="SignUp.html">Sign Up page</a><br /> <a href="UploadVideo.html">Upload Video page</a></div>
+<div><em><strong>More Videos</strong></em><br /> <a href="TheWishgranter.html">The Wishgranter video</a><br /> <a href="SwanLake.html">Swan Lake - Baxter Park</a><br /> <a href="Christmastime.html">Christmas Time</a><br /> <a href="Hydrangea.html">Hydrangea</a></div>
 
 </body>
 </html>
