@@ -1,22 +1,18 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="myflixstyle.css">
-<title>MyFlix by Shashini </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
 </head>
 <body>
-<h1>MyFlix by Shashini - Home</h1>
-<img src="media/pics/logo_myflix.PNG" width=25% height=25% style="float:right"><br>
+    <h1>Flask File Uploads Tutorial</h1>
 
-<!-- The form -->
-<form class="example" action="action_page.py"><br>
-  <input type="text" placeholder="Search.." name="search"><br>
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form><br>
-
-<div><a href="index.html">Home page</a><br /> <a href="Login.html">Login page</a><br /> <a href="SignUp.html">Sign Up page</a><br /> <a href="UploadVideo.html">Upload Video page</a></div>
-<div><em><strong>More Videos</strong></em><br /> <a href="TheWishgranter.html">The Wishgranter video</a><br /> <a href="SwanLake.html">Swan Lake - Baxter Park</a><br /> <a href="Christmastime.html">Christmas Time</a><br /> <a href="Hydrangea.html">Hydrangea</a></div>
-
+    <form method='POST' enctype='multipart/form-data'>
+        {{form.hidden_tag()}}
+        {{form.file()}}
+        {{form.submit()}}
+    </form>
 </body>
 </html>
