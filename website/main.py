@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from utils import *
 
 app = Flask(__name__)
-app.config['UPLOADS_FOLDER'] = '/media/pics'
+app.config['UPLOADS_FOLDER'] = '/media/videos/'
 app.config['SECRET_KEY'] = 'my secret'
 
 @app.route('/', methods=["GET", "POST"])
@@ -32,7 +32,7 @@ def index():
       
   return "Files uploaded successfully"
 
-@app.route('/media/pics/<path:filename>')
+@app.route('/media/videos/<path:filename>')
 def send_attachment(filename):
   return send_from_directory(app.config['UPLOADS_FOLDER'], 
     filename=filename, as_attachment=True)
