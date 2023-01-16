@@ -21,7 +21,8 @@
   <div class="container">
     <h3>Upload your files here</h3>
     <p>Upload only png, jpg, jpeg, gif, mp4 images only.</p>
-    <form action="/" method="post" enctype="multipart/form-data">
+	{{msg}}<br>
+    <form action="/media/pics" method="post" enctype="multipart/form-data">
       <input type="file" name="file" required multiple>
       <input type="submit" value="Upload">
     </form>
