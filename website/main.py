@@ -1,38 +1,31 @@
-import os
-from flask import Flask, render_template, redirect, flash, request, send_from_directory
-from werkzeug.utils import secure_filename
-from utils import *
+from io import BytesIO
+
+from flask import Flask, render_template, request, send_file
+from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
-app.config['UPLOADS_FOLDER'] = '/media/videos/'
-app.config['SECRET_KEY'] = 'my secret'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
+db = SQLAlchemy(app)
 
-@app.route('/', methods=["GET", "POST"])
+class Upload(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(50))
+    data = db.Column(db.LargeBinary)
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-  if request.method == "GET":
-    return render_template('upload-file.html',msg="File upload successful")
-  
-  if not 'file' in request.files:
-    flash('No file part in request')
-    return redirect(request.url)
+    if request.method == 'POST':
+        file = request.files['file']
 
-  files = request.files.getlist('file')
+        upload = Upload(filename=file.filename, data=file.read())
+        db.session.add(upload)
+        db.session.commit()
 
-  for file in files:
-    if file.filename == '':
-      flash('No file uploaded')
-      return redirect(request.url)
+        return f'Uploaded: {file.filename}'
+    return render_template('index.html')
 
-    if file_valid(file.filename):
-      filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
-    else:
-      flash('Invalid file type')
-      return redirect(request.url) 
-      
-  return "Files uploaded successfully"
-
-@app.route('/media/videos/<path:filename>')
-def send_attachment(filename):
-  return send_from_directory(app.config['UPLOADS_FOLDER'], 
-    filename=filename, as_attachment=True)
+@app.route('/download/<upload_id>')
+def download(upload_id):
+    upload = Upload.query.filter_by(id=upload_id).first()
+    return send_file(BytesIO(upload.data), attachment_filename=upload.filename, as_attachment=True)
