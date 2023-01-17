@@ -1,31 +1,53 @@
-from io import BytesIO
+import os
+from uuid import uuid4
 
-from flask import Flask, render_template, request, send_file
-from flask_sqlalchemy import SQLAlchemy 
+from flask import Flask, request, render_template, send_from_directory
+
+__author__ = 'Shashini'
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-db = SQLAlchemy(app)
+app = Flask(__name__, static_folder="media")
 
-class Upload(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(50))
-    data = db.Column(db.LargeBinary)
 
-@app.route('/', methods=['GET', 'POST'])
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+
+@app.route("/")
 def index():
-    if request.method == 'POST':
-        file = request.files['file']
+    return render_template("upload.html")
 
-        upload = Upload(filename=file.filename, data=file.read())
-        db.session.add(upload)
-        db.session.commit()
 
-        return f'Uploaded: {file.filename}'
-    return render_template('index.html')
+@app.route("/upload", methods=["POST"])
+def upload():
+    target = os.path.join(APP_ROOT, 'media/pics')
+    # target = os.path.join(APP_ROOT, 'static/')
+    print(target)
+    if not os.path.isdir(target):
+            os.mkdir(target)
+    else:
+        print("Couldn't create upload directory: {}".format(target))
+    print(request.files.getlist("file"))
+    for upload in request.files.getlist("file"):
+        print(upload)
+        print("{} is the file name".format(upload.filename))
+        filename = upload.filename
+        destination = "/".join([target, filename])
+        print("Accept incoming file:", filename)
+        print("Save it to:", destination)
+        upload.save(destination)
 
-@app.route('/download/<upload_id>')
-def download(upload_id):
-    upload = Upload.query.filter_by(id=upload_id).first()
-    return send_file(BytesIO(upload.data), attachment_filename=upload.filename, as_attachment=True)
+    # return send_from_directory("images", filename, as_attachment=True)
+    return render_template("complete.html", image_name=filename)
+
+
+@app.route('/media/pics/<filename>')
+def send_image(filename):
+    return send_from_directory("images", filename)
+
+
+@app.route('/video/<file>')
+def video(file):
+    return render_template('VideoStreamer.html',file=file)
+
+if __name__ == "__main__":
+    app.run(port=4555, debug=True)
